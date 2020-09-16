@@ -16,7 +16,7 @@ def file_to_list(file_name):
 
     result = [dict(zip(h, i)) for i in d]
 
-    print('ftl', result[0])
+    #print('ftl', result[0])
     return result
 
 

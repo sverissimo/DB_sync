@@ -1,14 +1,20 @@
+import requests
+
 file_names = {
-    'xls_file': 'Seguros.xls',
+    'xls_file': 'ConsultaVeiculos.xls',
     'sql_file': 'seguros.sql'
 }
 
 fields = [
     ('Apólice', 'apolice'),
-    ('Seguradora', 'seguradora_id'),
-    ('Data Início', 'data_emissao'),
-    ('Data fim', 'vencimento'),
+    ('Seguradora', 'seguradora'),
+    ('Data Inicio', 'data_emissao'),
+    ('Data Fim', 'vencimento'),
     ('Delegatário', 'delegatario'),
-
-    """ situacao text COLLATE pg_catalog."default", """
 ]
+
+steps = [7, 2, 29, 33]
+
+
+def formatData(data):
+    print(data)

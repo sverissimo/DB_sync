@@ -1,6 +1,6 @@
 -- Table: public.seguros
 
--- DROP TABLE public.seguros;
+DROP TABLE IF EXISTS public.seguros;
 
 CREATE TABLE public.seguros
 (
@@ -12,7 +12,7 @@ CREATE TABLE public.seguros
     delegatario_id smallint,
     created_at timestamp(4) with time zone DEFAULT now(),
     situacao text COLLATE pg_catalog."default",
-    CONSTRAINT seguro_pk PRIMARY KEY (id)
+    CONSTRAINT seguroZ_pk PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
@@ -24,9 +24,9 @@ ALTER TABLE public.seguros
 
 -- Index: apolice_index
 
-DROP INDEX public.apolice_index;
+DROP INDEX IF EXISTS public.apoliceZ_index;
 
-CREATE INDEX apolice_index
+CREATE INDEX apoliceZ_index
     ON public.seguros USING btree
     (apolice COLLATE pg_catalog."default" ASC NULLS LAST)
     TABLESPACE pg_default;

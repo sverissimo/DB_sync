@@ -19,3 +19,5 @@ fields = [
     ('Bairro', 'bairro'),
     ('CEP', 'cep'),
 ]
+
+steps = [7, 0, 13, 15]

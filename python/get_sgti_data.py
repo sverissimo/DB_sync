@@ -1,48 +1,52 @@
 from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 
-def get_sgti_data(browser, Keys):
-    actions = ActionChains(browser) 
+
+def get_sgti_data(browser, Keys, steps):
+    actions = ActionChains(browser)
 
     sleep(2)
-    for _ in range(7):
-        print('theres a 3 pointer')
+    for _ in range(steps[0]):
         actions = actions.send_keys(Keys.TAB)
     actions.perform()
+    print('consultas')
 
-    actions = ActionChains(browser) 
+    actions = ActionChains(browser)
     sleep(1)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
 
     sleep(1)
-    actions = ActionChains(browser) 
+    actions = ActionChains(browser)
+    if steps[1] > 0:
+        for _ in range(steps[1]):
+            actions = actions.send_keys(Keys.TAB)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
 
     sleep(1)
-    actions = ActionChains(browser) 
-    for _ in range(13):
-        print('13')
+    actions = ActionChains(browser)
+    for _ in range(steps[2]):
         actions = actions.send_keys(Keys.TAB)
+    print('entity')
     actions.perform()
 
     sleep(1)
-    actions = ActionChains(browser) 
+    actions = ActionChains(browser)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
 
     sleep(1)
-    for _ in range(15):
-        print('nailed it.')
+    for _ in range(steps[3]):
+
         actions = actions.send_keys(Keys.TAB)
     actions.perform()
+    print('downloaded.')
 
     sleep(2)
-    actions = ActionChains(browser) 
+    actions = ActionChains(browser)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
-
 
     """
     for _ in range(13):

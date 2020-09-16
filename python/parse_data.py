@@ -1,10 +1,9 @@
 import re
-
 from field_conversor import field_conversor
 from format_cnpj import format_cnpj
 
 
-def parse_data(collection):
+def parse_data(collection, fields, formatData):
 
     parsed_data_SGTI = []
     newObj = {}
@@ -15,7 +14,7 @@ def parse_data(collection):
 
                 if(f == 'Cpf/Cnpj'):
                     obj[f] = format_cnpj(obj[f])
-                new_f = field_conversor(f)
+                new_f = field_conversor(f, fields)
 
                 if(new_f is None or new_f == ''):
                     continue
@@ -29,5 +28,5 @@ def parse_data(collection):
                 newObj = {**newObj, new_f: obj[f]}
             parsed_data_SGTI.append(newObj)
             newObj = {}
-
+    formatData(parsed_data_SGTI)
     return parsed_data_SGTI
