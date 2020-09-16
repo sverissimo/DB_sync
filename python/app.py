@@ -1,8 +1,10 @@
 import os
+from sys import argv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-from empresas import empresas
+#from entities.empresas import file_names
+from importlib import import_module
 from login import login
 from get_sgti_data import get_sgti_data
 from time import sleep
@@ -11,9 +13,17 @@ from file_to_list import file_to_list
 from parse_data import parse_data
 from update_db import update_db
 
-file_name = empresas['file_name']
+module_name = argv[1]
+module_path = 'entities.' + module_name
+
+module = import_module(module_path, '.')
+
+file_names = module.file_names
+
+file_name = file_names['xls_file']
 file_path = f'C:\\Users\\sandr\\Downloads\\{file_name}'
-sql_file = empresas['sql_file']
+sql_file = file_names['sql_file']
+
 
 # Remove existing file (standard xls from sgti)
 if os.path.exists(file_path):

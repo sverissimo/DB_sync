@@ -1,3 +1,4 @@
 .env
 /python/debug.log
 /python/__pycache__
+/python/entities/__pycache__
