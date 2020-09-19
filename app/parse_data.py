@@ -28,5 +28,7 @@ def parse_data(collection, fields, formatData):
                 newObj = {**newObj, new_f: obj[f]}
             parsed_data_SGTI.append(newObj)
             newObj = {}
-    formatData(parsed_data_SGTI)
-    return parsed_data_SGTI
+    final_data = formatData(parsed_data_SGTI)
+    """ for x in final_data:
+        print(x, '/n') """
+    return final_data

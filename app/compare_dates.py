@@ -1,0 +1,26 @@
+import sys
+from datetime import datetime
+
+
+def compare_dates(data_emissao, data_vencimento):
+
+    sf = '%d/%m/%Y'
+    emissao = datetime.strptime(data_emissao, sf)
+    vencimento = datetime.strptime(data_vencimento, sf)
+    current = datetime.now()
+
+    if emissao > vencimento:
+        return 'Inválido'
+    if emissao > current:
+        return 'Pendente'
+    if vencimento < current:
+        return 'Vencido'
+    if vencimento >= current:
+        return 'Vigente'
+
+
+"""
+from DB to python
+f = '%Y-%m-%d %H:%M:%S.%f'
+a = datetime.strptime('2020-09-01 13:09:41.4196', f)
+"""
