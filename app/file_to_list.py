@@ -1,12 +1,20 @@
 from bs4 import BeautifulSoup as soup
 import re
+import json
 # Pega o arquivo excel(tabela html na verdade) baixado do SGTI e transforma em uma list de dictionaries
 
 
 def file_to_list(file_name):
-    # tst = re.search('Delegatarios', file_name)
 
-    f = open(f'C:\\Users\\sandr\\Downloads\\{file_name}', 'r')
+    # TESTING...
+    f = open('C:\\Users\\sandr\\Downloads\\mock_seg_data.json',
+             'r', encoding='utf-8')
+    result = json.load(f, encoding='utf-8-sig')
+
+    return result
+
+
+""" f = open(f'C:\\Users\\sandr\\Downloads\\{file_name}', 'r')
     raw_file = f.read()
     print('done open and read')
 
@@ -18,8 +26,15 @@ def file_to_list(file_name):
     result = [dict(zip(h, i)) for i in d]
 
     f.close()
+
     #result = result[0:30]
-    return result
+    return result """
 
 
-# file_to_list('Delegatarios.xls')
+""" 
+    CREATES A JSON FILE FOR TESTING PURPOSES - AVOID SLOW SOUP PARSING...
+    mock_data = open(
+        'C:\\Users\\sandr\\Downloads\\mock_seg_data.json', 'w', encoding='utf-8')
+    json.dump(result, mock_data, ensure_ascii=False)
+    mock_data.close() 
+    """
