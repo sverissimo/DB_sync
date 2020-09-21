@@ -49,4 +49,4 @@ collection = file_to_list(file_name)
 # Parse the list into the correct format/dataTypes of Postgresql DB
 table_to_postgres = parse_data(collection, fields, formatData)
 # Post the update request.
-#update_db(table_to_postgres, module_name)
+update_db(table_to_postgres, module_name)

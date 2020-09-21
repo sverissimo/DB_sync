@@ -67,25 +67,4 @@ def formatData(data):
         apolices.append({'apolice': i['apolice'], 'placas': vehicles})
         vehicles = []
 
-    updateDict = {
-        'table': 'veiculo',
-        'tablePK': 'veiculo_id',
-        'column': 'apolice'
-    }
-
-    #updateDict['value'] = list(apolices[0].keys())[0]
-
-    # print(updateDict)
-    for ap in apolices:
-        updateDict['value'] = ap['apolice']
-        updateDict['placas'] = ap['placas']
-        if ap['apolice'] == '1002306058267':
-            print(updateDict)
-
-    """ r = requests.put(
-        'http://localhost:3001/api/updateInsurances', json=updateDict)
-
-    print(r.json()) """
-
-    print(updateDict)
-    return filtered_insurances
+    return apolices
