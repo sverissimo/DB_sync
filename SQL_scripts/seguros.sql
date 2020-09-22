@@ -20,7 +20,7 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE public.seguros
-    OWNER to postgres;
+    OWNER to svom;
 
 -- Index: apolice_index
 

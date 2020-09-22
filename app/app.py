@@ -40,10 +40,11 @@ login(browser, Keys)
 get_sgti_data(browser, Keys, steps)
 sleep(2)
 
+"""
 # DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
 create_sql_table(sql_file)
 sleep(2)
-"""
+
 # Change xls(sgti) file into a python list
 collection = file_to_list(file_name)
 # Parse the list into the correct format/dataTypes of Postgresql DB

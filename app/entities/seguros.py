@@ -26,6 +26,7 @@ apolices = []
 
 
 def formatData(data):
+    # Retorna uma lista de dicts no formato [{apolice: <nApolice>, placas:[<lista de placas>]}]
     print('formatData started')
     print(data[0])
     for d in data:

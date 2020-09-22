@@ -2,6 +2,7 @@ import requests
 
 
 def update_seguros(sgti_data):
+    # Prepara o objeto no formato do endpoint para atualização de seguros, com table, table PK etc e o sgti_data que vem do formatData de cada entidade
     updateDict = {
         'table': 'veiculo',
         'tablePK': 'veiculo_id',

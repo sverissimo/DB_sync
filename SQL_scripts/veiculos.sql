@@ -1,6 +1,6 @@
 -- Table: public.veiculos
 
--- DROP TABLE public.veiculos;
+DROP TABLE IF EXISTS public.veiculos;
 
 CREATE TABLE public.veiculos
 (
@@ -8,38 +8,43 @@ CREATE TABLE public.veiculos
     placa character varying(8) COLLATE pg_catalog."default",
     renavam character varying(11) COLLATE pg_catalog."default",
     data_registro timestamp(4) with time zone DEFAULT now(),
-    utilizacao character varying(25) COLLATE pg_catalog."default",
-    dominio character varying(20) COLLATE pg_catalog."default",
-    apolice character varying(25) COLLATE pg_catalog."default",
-    poltronas smallint,
-    eixos smallint,
-    pbt character varying(11) COLLATE pg_catalog."default",
-    ano_chassi smallint,
-    n_chassi character varying(25) COLLATE pg_catalog."default",
-    valor_chassi character varying(20) COLLATE pg_catalog."default",
-    situacao text COLLATE pg_catalog."default",
-    indicador_idade_old smallint,
-    ano_carroceria smallint,
-    valor_carroceria character varying(20) COLLATE pg_catalog."default",
-    piques_poltrona smallint,
-    distancia_minima smallint,
-    distancia_maxima smallint,
-    peso_dianteiro character varying(5) COLLATE pg_catalog."default",
-    peso_traseiro character varying(10) COLLATE pg_catalog."default",
-    cores character varying(50) COLLATE pg_catalog."default",
-    equipamentos_id character varying(400) COLLATE pg_catalog."default",
     delegatario_id smallint,
-    pneumaticos smallint,
+    delegatario text COLLATE pg_catalog."default",
+    situacao text COLLATE pg_catalog."default",
+    utilizacao text COLLATE pg_catalog."default",
+    dominio text COLLATE pg_catalog."default",
+    apolice text COLLATE pg_catalog."default",
     cilindros smallint,
     potencia smallint,
+    n_chassi character varying(25) COLLATE pg_catalog."default",
+    ano_chassi smallint,
+    valor_chassi character varying(20) COLLATE pg_catalog."default",
     modelo_chassi_id smallint,
+    modelo_chassi text COLLATE pg_catalog."default",
+    ano_carroceria smallint,
+    valor_carroceria character varying(20) COLLATE pg_catalog."default",
     modelo_carroceria_id smallint,
-    delegatario_compartilhado smallint,
+    modelo_carroceria text COLLATE pg_catalog."default",
+    poltronas smallint,
+    piques_poltrona smallint,
+    distancia_minima numeric(9, 2),
+    distancia_maxima numeric(9, 2),
+    eixos smallint,
+    pneumaticos smallint,
+    peso_dianteiro character varying(8) COLLATE pg_catalog."default",
+    peso_traseiro character varying(10) COLLATE pg_catalog."default",
+    pbt character varying(11) COLLATE pg_catalog."default",
+    cores text COLLATE pg_catalog."default",
+    equipamentos text COLLATE pg_catalog."default",
+    delegatario_compartilhado text COLLATE pg_catalog."default",
+    compartilhado_id smallint,
     equipa smallint[],
     acessibilidade_id smallint[],
-    CONSTRAINT veiculo_pkey PRIMARY KEY (veiculo_id),
-    CONSTRAINT delegatario FOREIGN KEY (delegatario_id)
-        REFERENCES public.delegatario (delegatario_id) MATCH SIMPLE
+    sipro text COLLATE pg_catalog."default",    
+    obs text COLLATE pg_catalog."default",
+    CONSTRAINT veiculos_pkey PRIMARY KEY (veiculo_id),
+    CONSTRAINT delegatario_id FOREIGN KEY (delegatario_id)
+        REFERENCES public.empresas (delegatario_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID,
@@ -66,7 +71,7 @@ ALTER TABLE public.veiculos
 
 -- DROP INDEX public.placa_index;
 
-CREATE INDEX placa_index
+CREATE INDEX placaZ_index
     ON public.veiculos USING btree
     (placa COLLATE pg_catalog."default" ASC NULLS LAST)
     TABLESPACE pg_default;
