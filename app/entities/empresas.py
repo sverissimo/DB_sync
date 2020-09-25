@@ -1,3 +1,5 @@
+from format_cnpj import format_cnpj
+
 file_names = {
     'xls_file': 'Delegatarios.xls',
     'sql_file': 'empresas.sql'
@@ -21,3 +23,10 @@ fields = [
 ]
 
 steps = [7, 0, 13, 15]
+
+
+def formatData(data):
+    for d in data:
+        d['cnpj'] = format_cnpj(d['cnpj'])
+    print(len(data))
+    return data

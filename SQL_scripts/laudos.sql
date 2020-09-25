@@ -1,6 +1,6 @@
 -- Table: public.laudos
 
--- DROP TABLE public.laudos;
+DROP TABLE IF EXISTS public.laudo;
 
 CREATE TABLE public.laudo
 (

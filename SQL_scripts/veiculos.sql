@@ -2,9 +2,11 @@
 
 DROP TABLE IF EXISTS public.veiculos;
 
+ALTER SEQUENCE veiculo_id_seq RESTART WITH 1;
+
 CREATE TABLE public.veiculos
 (
-    veiculo_id integer NOT NULL DEFAULT nextval('veiculo_veiculo_id_seq'::regclass),
+    veiculo_id integer NOT NULL DEFAULT nextval('veiculo_id_seq'::regclass),
     placa character varying(8) COLLATE pg_catalog."default",
     renavam character varying(11) COLLATE pg_catalog."default",
     data_registro timestamp(4) with time zone DEFAULT now(),
@@ -38,8 +40,8 @@ CREATE TABLE public.veiculos
     equipamentos text COLLATE pg_catalog."default",
     delegatario_compartilhado text COLLATE pg_catalog."default",
     compartilhado_id smallint,
-    equipa smallint[],
-    acessibilidade_id smallint[],
+    equipamentos_id jsonb,
+    acessibilidade_id jsonb,
     sipro text COLLATE pg_catalog."default",    
     obs text COLLATE pg_catalog."default",
     CONSTRAINT veiculos_pkey PRIMARY KEY (veiculo_id),

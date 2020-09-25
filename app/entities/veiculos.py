@@ -53,4 +53,9 @@ def formatData(data):
             d['dominio'] = 'Leasing'
         if d['dominio'] == 'Não':
             d['dominio'] = 'Veículo próprio'
+        d['modelo_chassi'] = d['modelo_chassi'].replace('0 500 R eliminar', '0500 R').replace(
+            'OF 1722/59 eliminar', 'OF-1722/59').replace(' - ', '-').replace('OF 1722', 'OF-1722').replace('0500 RS 1836/30 eliminar', 'O-500 RS 1836/30')
+
+        d['modelo_carroceria'] = d['modelo_carroceria'].upper()
+
     return data

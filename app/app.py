@@ -1,4 +1,5 @@
 import os
+import datetime
 from sys import argv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -24,30 +25,39 @@ fields = module.fields
 steps = module.steps
 formatData = module.formatData
 
-file_name = file_names['xls_file']
-file_path = f'C:\\Users\\sandr\\Downloads\\{file_name}'
+xls_file = file_names['xls_file']
+xls_path = f'C:\\Users\\sandr\\Downloads\\{xls_file}'
 sql_file = file_names['sql_file']
 
-""" # Remove existing file (standard xls from sgti)
-if os.path.exists(file_path):
-    os.remove(file_path)
+# Check if file is older than 1 day:
+xls_timestamp = os.path.getmtime(xls_path)
+m_time = datetime.datetime.fromtimestamp(xls_timestamp)
+today = datetime.datetime.now()
 
-# create browser instance and pass to login function
-browser = webdriver.Chrome()
-login(browser, Keys)
+one_day_old = today - m_time > datetime.timedelta(100)
+print(one_day_old)
 
-# navigates through SGTI to get xls file
-get_sgti_data(browser, Keys, steps)
-sleep(2)
+# If older than 100 days, get new file from SGTI
+if one_day_old:
+    # Remove existing file (standard xls from sgti)
+    if os.path.exists(xls_path):
+        os.remove(xls_path)
 
-"""
-# DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
-create_sql_table(sql_file)
-sleep(2)
+    # create browser instance and pass to login function
+    browser = webdriver.Chrome()
+    login(browser, Keys)
+
+    # navigates through SGTI to get xls file
+    get_sgti_data(browser, Keys, steps)
+    sleep(2)
 
 # Change xls(sgti) file into a python list
-collection = file_to_list(file_name)
+collection = file_to_list(xls_file)
 # Parse the list into the correct format/dataTypes of Postgresql DB
 table_to_postgres = parse_data(collection, fields, formatData)
+
+# DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
+create_sql_table(sql_file)
+sleep(1)
 # Post the update request.
 update_db(table_to_postgres, module_name)
