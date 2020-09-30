@@ -6,9 +6,9 @@ import datetime
 # Pega o arquivo excel(tabela html na verdade) baixado do SGTI e transforma em uma list de dictionaries
 
 
-def file_to_list(xls_file_name):
+def file_to_list(xls_file_name, update_file):
 
-    if xls_file_name == 'Delegatarios.xls':
+    if update_file:
         f = open(f'C:\\Users\\sandr\\Downloads\\{xls_file_name}', 'r')
         raw_file = f.read()
         print('done open and read')
@@ -21,7 +21,15 @@ def file_to_list(xls_file_name):
         result = [dict(zip(h, i)) for i in d]
         f.close()
 
+        # CREATES A JSON FILE FOR TESTING PURPOSES - AVOID SLOW SOUP PARSING...
+        json_file = xls_file_name.replace('.xls', '.json')
+        mock_data = open(
+            f'C:\\Users\\sandr\\Downloads\\{json_file}', 'w', encoding='utf-8')
+        json.dump(result, mock_data, ensure_ascii=False)
+        mock_data.close()
+
         return result
+
     else:
         f = open('C:\\Users\\sandr\\Downloads\\mock_seg_data.json',
                  'r', encoding='utf-8')

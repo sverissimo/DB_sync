@@ -58,4 +58,5 @@ def formatData(data):
 
         d['modelo_carroceria'] = d['modelo_carroceria'].upper()
 
+    print('veiculos data parsed.')
     return data

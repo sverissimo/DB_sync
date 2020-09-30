@@ -47,6 +47,8 @@ def get_sgti_data(browser, Keys, steps):
     actions = ActionChains(browser)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
+    sleep(6)
+    browser.close()
 
     """
     for _ in range(13):

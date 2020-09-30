@@ -27,18 +27,20 @@ formatData = module.formatData
 
 xls_file = file_names['xls_file']
 xls_path = f'C:\\Users\\sandr\\Downloads\\{xls_file}'
-sql_file = file_names['sql_file']
 
 # Check if file is older than 1 day:
-xls_timestamp = os.path.getmtime(xls_path)
-m_time = datetime.datetime.fromtimestamp(xls_timestamp)
-today = datetime.datetime.now()
+one_day_old = True
 
-one_day_old = today - m_time > datetime.timedelta(100)
-print(one_day_old)
+if os.path.exists(xls_path):
+    xls_timestamp = os.path.getmtime(xls_path)
+    m_time = datetime.datetime.fromtimestamp(xls_timestamp)
+    today = datetime.datetime.now()
+
+    one_day_old = today - m_time > datetime.timedelta(1)
+    print(one_day_old)
 
 # If older than 100 days, get new file from SGTI
-if one_day_old:
+elif one_day_old:
     # Remove existing file (standard xls from sgti)
     if os.path.exists(xls_path):
         os.remove(xls_path)
@@ -51,13 +53,33 @@ if one_day_old:
     get_sgti_data(browser, Keys, steps)
     sleep(2)
 
-# Change xls(sgti) file into a python list
-collection = file_to_list(xls_file)
-# Parse the list into the correct format/dataTypes of Postgresql DB
-table_to_postgres = parse_data(collection, fields, formatData)
+# Change xls(sgti) file into a python list and updates if more than 1 dayold
+collection = file_to_list(xls_file, one_day_old)
 
-# DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
-create_sql_table(sql_file)
-sleep(1)
-# Post the update request.
-update_db(table_to_postgres, module_name)
+
+# Se o módulo for veículos, essa lista é para fazer 3 atualizações no loop no final dessa função, referentes às 3 tabelas do Postgresql para atualizar.
+# Optei por loop porque o arquivo do SGTI referente a veiculos, seguros e laudos é a mesma, depois é só rodar as validações e atualizações de tabela.
+modules_to_update = []
+if module_name == 'veiculos':
+    modules_to_update = ['veiculos', 'seguros', 'laudos']
+else:
+    modules_to_update = [module_name]
+
+
+for m in modules_to_update:
+    # Declara e inicializa variáveis:
+    module_path = 'entities.' + m
+    module = import_module(module_path, '.')
+
+    fields = module.fields
+    formatData = module.formatData
+    sql_file = module.file_names['sql_file']
+
+    # Parse the list into the correct format/dataTypes of Postgresql DB
+    table_to_postgres = parse_data(collection, fields, formatData)
+
+    # DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
+    create_sql_table(sql_file)
+    sleep(1)
+    # Post the update request.
+    update_db(table_to_postgres, m)

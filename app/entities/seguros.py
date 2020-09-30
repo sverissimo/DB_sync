@@ -67,5 +67,8 @@ def formatData(data):
 
         apolices.append({'apolice': i['apolice'], 'placas': vehicles})
         vehicles = []
+        del i['placa']
 
-    return apolices
+    data_to_return = {'apolices': apolices, 'seguros': filtered_insurances}
+
+    return data_to_return

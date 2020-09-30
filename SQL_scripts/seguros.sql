@@ -2,10 +2,12 @@
 
 DROP TABLE IF EXISTS public.seguros;
 
+ALTER SEQUENCE seguro_id_seq RESTART WITH 1;
+
 CREATE TABLE public.seguros
 (
     id smallint NOT NULL DEFAULT nextval('seguro_id_seq'::regclass),
-    apolice text varying(25) COLLATE pg_catalog."default",
+    apolice text COLLATE pg_catalog."default",
     seguradora_id smallint,
     data_emissao date,
     vencimento date,

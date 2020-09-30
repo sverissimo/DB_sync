@@ -11,4 +11,4 @@ def create_sql_table(sql_file):
     print(query)
     r = requests.post('http://localhost:3001/sync/createTable', query)
 
-    print(r.text)
+    print(r.text, sql_file)

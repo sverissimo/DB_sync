@@ -34,4 +34,5 @@ def formatData(data):
             laudos.append(d)
             if d['id'] == '000008654-19':
                 print(d)
+    print('laudos data parsed.')
     return laudos
