@@ -15,6 +15,7 @@ from update_db import update_db
 
 # Get input from user to import module
 module_name = argv[1]
+
 module_path = 'entities.' + module_name
 
 module = import_module(module_path, '.')
@@ -40,7 +41,7 @@ if os.path.exists(xls_path):
     print(one_day_old)
 
 # If older than 100 days, get new file from SGTI
-elif one_day_old:
+if one_day_old:
     # Remove existing file (standard xls from sgti)
     if os.path.exists(xls_path):
         os.remove(xls_path)

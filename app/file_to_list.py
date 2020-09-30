@@ -8,6 +8,9 @@ import datetime
 
 def file_to_list(xls_file_name, update_file):
 
+    json_file = xls_file_name.replace('.xls', '.json')
+    print(json_file)
+
     if update_file:
         f = open(f'C:\\Users\\sandr\\Downloads\\{xls_file_name}', 'r')
         raw_file = f.read()
@@ -22,7 +25,6 @@ def file_to_list(xls_file_name, update_file):
         f.close()
 
         # CREATES A JSON FILE FOR TESTING PURPOSES - AVOID SLOW SOUP PARSING...
-        json_file = xls_file_name.replace('.xls', '.json')
         mock_data = open(
             f'C:\\Users\\sandr\\Downloads\\{json_file}', 'w', encoding='utf-8')
         json.dump(result, mock_data, ensure_ascii=False)
@@ -31,7 +33,7 @@ def file_to_list(xls_file_name, update_file):
         return result
 
     else:
-        f = open('C:\\Users\\sandr\\Downloads\\mock_seg_data.json',
+        f = open(f'C:\\Users\\sandr\\Downloads\\{json_file}',
                  'r', encoding='utf-8')
         result = json.load(f, encoding='utf-8-sig')
         return result

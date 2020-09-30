@@ -28,5 +28,8 @@ steps = [7, 0, 13, 15]
 def formatData(data):
     for d in data:
         d['cnpj'] = format_cnpj(d['cnpj'])
+
+        d['razao_social'] = d['razao_social'].replace(
+            'LOPES E CIA LTDA.', 'LOPES & CIA LTDA')
     print(len(data))
     return data

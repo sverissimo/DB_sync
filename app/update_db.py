@@ -17,7 +17,7 @@ def update_seguros(apolices):
         if ap['apolice'] == '1002800079936':
             print(updateDict, ap)
 
-        r = requests.put(
+        requests.put(
             'http://localhost:3001/api/updateInsurances', json=updateDict)
     #print(i, r.json())
     #i += 1
@@ -32,8 +32,7 @@ def update_db(sgti_data, table):
         update_seguros(apolices)
 
     if table == 'laudos':
-        table = 'laudo'
-        print(table)
+        request_data['table'] = 'laudo'
 
     r = requests.post(
         'http://localhost:3001/sync/updateTable', json=request_data)

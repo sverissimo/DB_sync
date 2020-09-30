@@ -17,6 +17,7 @@ fields = [
     ('Data de Registro', 'data_registro'),
     ('Utilização', 'utilizacao'),
     ('Delegatário', 'delegatario'),
+    ('Código', 'codigo_empresa'),
     ('Situação', 'situacao'),
     ('Leasing', 'dominio'),
     ('Apólice', 'apolice'),

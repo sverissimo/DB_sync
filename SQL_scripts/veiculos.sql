@@ -11,6 +11,7 @@ CREATE TABLE public.veiculos
     renavam character varying(11) COLLATE pg_catalog."default",
     data_registro timestamp(4) with time zone DEFAULT now(),
     delegatario_id smallint,
+    codigo_empresa integer,
     delegatario text COLLATE pg_catalog."default",
     situacao text COLLATE pg_catalog."default",
     utilizacao text COLLATE pg_catalog."default",
@@ -45,11 +46,11 @@ CREATE TABLE public.veiculos
     sipro text COLLATE pg_catalog."default",    
     obs text COLLATE pg_catalog."default",
     CONSTRAINT veiculos_pkey PRIMARY KEY (veiculo_id),
-    CONSTRAINT delegatario_id FOREIGN KEY (delegatario_id)
+    /* CONSTRAINT delegatario_id FOREIGN KEY (delegatario_id)
         REFERENCES public.empresas (delegatario_id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-        NOT VALID,
+        NOT VALID, */
     CONSTRAINT modelo_carroceria FOREIGN KEY (modelo_carroceria_id)
         REFERENCES public.modelo_carroceria (id) MATCH SIMPLE
         ON UPDATE NO ACTION
