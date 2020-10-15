@@ -13,12 +13,12 @@ fields = [
     ('Data Inicio', 'data_emissao'),
     ('Data Fim', 'vencimento'),
     ('Delegatário', 'delegatario'),
+    ('Código', 'codigo_empresa'),
     ('Placa', 'placa')
 ]
 
 steps = [7, 2, 29, 33]
 
-empresas = requests.get('http://localhost:3001/api/empresas').json()
 seguradoras = requests.get('http://localhost:3001/api/seguradoras').json()
 
 filtered_insurances = []
@@ -34,10 +34,6 @@ def formatData(data):
         d['seguradora'] = d['seguradora'].replace('S/A', 'S.A.')
         d['seguradora'] = d['seguradora'].replace('SA', 'S.A.')
         d['seguradora'] = d['seguradora'].replace('  ', ' ')
-
-        for e in empresas:
-            if d['delegatario'] == e['razao_social']:
-                d['delegatario_id'] = e['delegatario_id']
 
         for s in seguradoras:
             if d['seguradora'] == s['seguradora']:
@@ -56,7 +52,7 @@ def formatData(data):
         count = 0
 
     for i in filtered_insurances:
-        if 'seguradora_id' not in i or 'delegatario_id' not in i:
+        if 'seguradora_id' not in i:
             i['seguradora_id'] = 'NULL'
             print(i)
 

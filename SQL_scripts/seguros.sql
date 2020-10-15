@@ -10,8 +10,8 @@ CREATE TABLE public.seguros
     apolice text COLLATE pg_catalog."default",
     seguradora_id smallint,
     data_emissao date,
-    vencimento date,
-    delegatario_id smallint,
+    vencimento date,    
+    codigo_empresa integer,
     created_at timestamp(4) with time zone DEFAULT now(),
     situacao text COLLATE pg_catalog."default",
     CONSTRAINT seguroZ_pk PRIMARY KEY (id)

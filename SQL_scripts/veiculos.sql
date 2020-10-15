@@ -1,8 +1,11 @@
 -- Table: public.veiculos
 
-DROP TABLE IF EXISTS public.veiculos;
+CREATE SEQUENCE IF NOT EXISTS veiculo_id_seq as SMALLINT
+START 1;
 
 ALTER SEQUENCE veiculo_id_seq RESTART WITH 1;
+
+DROP TABLE IF EXISTS public.veiculos;
 
 CREATE TABLE public.veiculos
 (

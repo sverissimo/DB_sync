@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS public.empresas;
 CREATE TABLE public.empresas
 (
     delegatario_id smallserial,
-    old_id integer,
+    codigo_empresa integer,
     razao_social text COLLATE pg_catalog."default",
     situacao text COLLATE pg_catalog."default",
     vencimento_contrato date,

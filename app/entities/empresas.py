@@ -6,7 +6,7 @@ file_names = {
 }
 
 fields = [
-    ('Código', 'old_id'),
+    ('Código', 'codigo_empresa'),
     ('Razão Social', 'razao_social'),
     ('Situação', 'situacao'),
     ('Data Vencimento', 'vencimento_contrato'),

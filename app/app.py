@@ -37,7 +37,7 @@ if os.path.exists(xls_path):
     m_time = datetime.datetime.fromtimestamp(xls_timestamp)
     today = datetime.datetime.now()
 
-    one_day_old = today - m_time > datetime.timedelta(1)
+    one_day_old = today - m_time > datetime.timedelta(10)
     print(one_day_old)
 
 # If older than 100 days, get new file from SGTI
@@ -55,8 +55,8 @@ if one_day_old:
     sleep(2)
 
 # Change xls(sgti) file into a python list and updates if more than 1 dayold
-collection = file_to_list(xls_file, one_day_old)
-
+#collection = file_to_list(xls_file, one_day_old)
+collection = file_to_list(xls_file, True)
 
 # Se o módulo for veículos, essa lista é para fazer 3 atualizações no loop no final dessa função, referentes às 3 tabelas do Postgresql para atualizar.
 # Optei por loop porque o arquivo do SGTI referente a veiculos, seguros e laudos é a mesma, depois é só rodar as validações e atualizações de tabela.
