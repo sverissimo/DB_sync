@@ -1,10 +1,13 @@
 -- Table: public.empresas
+CREATE SEQUENCE IF NOT EXISTS codigo_empresa_seq
+START 71000;
+
 DROP TABLE IF EXISTS public.empresas;
 
 CREATE TABLE public.empresas
 (
     delegatario_id smallserial,
-    codigo_empresa integer,
+    codigo_empresa serial nextval('codigo_empresa_seq'::regclass),
     razao_social text COLLATE pg_catalog."default",
     situacao text COLLATE pg_catalog."default",
     vencimento_contrato date,
