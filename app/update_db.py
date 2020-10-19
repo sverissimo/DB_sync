@@ -4,7 +4,7 @@ import requests
 def update_seguros(apolices):
     # Prepara o objeto no formato do endpoint para atualização de seguros, com table, table PK etc e o sgti_data que vem do formatData de cada entidade
     updateDict = {
-        'table': 'veiculo',
+        'table': 'veiculos',
         'tablePK': 'veiculo_id',
         'column': 'apolice'
     }
@@ -28,8 +28,9 @@ def update_db(sgti_data, table):
 
     if table == 'seguros':
         request_data = {'table': table, 'sgti_data': sgti_data['seguros']}
-        apolices = sgti_data['apolices']
-        update_seguros(apolices)
+        # Essas 2 linhas abaixo somente serão necessárias se o 'app.py seguros' for rodado, atualizando APENAS os seguros.~Senão n precisa pq a apolice do veiculo vem da mesma tabela.
+        #apolices = sgti_data['apolices']
+        # update_seguros(apolices)
 
     if table == 'laudos':
         request_data['table'] = 'laudo'

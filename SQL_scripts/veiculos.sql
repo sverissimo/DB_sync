@@ -12,8 +12,7 @@ CREATE TABLE public.veiculos
     veiculo_id integer NOT NULL DEFAULT nextval('veiculo_id_seq'::regclass),
     placa character varying(8) COLLATE pg_catalog."default",
     renavam character varying(11) COLLATE pg_catalog."default",
-    data_registro timestamp(4) with time zone DEFAULT now(),
-    delegatario_id smallint,
+    data_registro timestamp(4) with time zone DEFAULT now(),    
     codigo_empresa integer,
     delegatario text COLLATE pg_catalog."default",
     situacao text COLLATE pg_catalog."default",
@@ -43,14 +42,14 @@ CREATE TABLE public.veiculos
     cores text COLLATE pg_catalog."default",
     equipamentos text COLLATE pg_catalog."default",
     delegatario_compartilhado text COLLATE pg_catalog."default",
-    compartilhado_id smallint,
+    compartilhado_id integer,
     equipamentos_id jsonb,
     acessibilidade_id jsonb,
     sipro text COLLATE pg_catalog."default",    
     obs text COLLATE pg_catalog."default",
     CONSTRAINT veiculos_pkey PRIMARY KEY (veiculo_id),
-    /* CONSTRAINT delegatario_id FOREIGN KEY (delegatario_id)
-        REFERENCES public.empresas (delegatario_id) MATCH SIMPLE
+    /* CONSTRAINT codigo_empresa FOREIGN KEY (codigo_empresa)
+        REFERENCES public.empresas (codigo_empresa) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
         NOT VALID, */

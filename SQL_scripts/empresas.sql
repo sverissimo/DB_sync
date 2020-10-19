@@ -6,8 +6,7 @@ DROP TABLE IF EXISTS public.empresas;
 
 CREATE TABLE public.empresas
 (
-    delegatario_id smallserial,
-    codigo_empresa serial nextval('codigo_empresa_seq'::regclass),
+    codigo_empresa integer NOT NULL DEFAULT nextval('codigo_empresa_seq'::regclass),
     razao_social text COLLATE pg_catalog."default",
     situacao text COLLATE pg_catalog."default",
     vencimento_contrato date,
@@ -23,7 +22,7 @@ CREATE TABLE public.empresas
     bairro text COLLATE pg_catalog."default",
     created_at timestamp with time zone DEFAULT now(),
     cep text COLLATE pg_catalog."default",
-    CONSTRAINT empresas_pkey PRIMARY KEY (delegatario_id)
+    CONSTRAINT empresas_pkey PRIMARY KEY (codigo_empresa)
 )
 WITH (
     OIDS = FALSE

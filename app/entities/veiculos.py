@@ -10,7 +10,7 @@ file_names = {
 
 # Esse tem alem do Postgres: sipro, obs
 # Aquém do Postgres: id, indicador_idade, acessibildade_id
-# Convertidos: equipamentos_id, delegatario_id, modelo_carroceria_id, modelo_chassi_id, delegatario_compartilhado_id
+# Convertidos: equipamentos_id, codigo_empresa, modelo_carroceria_id, modelo_chassi_id, delegatario_compartilhado_id
 fields = [
     ('Placa', 'placa'),
     ('RENAVAM', 'renavam'),
