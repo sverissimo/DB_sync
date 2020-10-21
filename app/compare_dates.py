@@ -5,9 +5,9 @@ from datetime import datetime
 def compare_dates(data_emissao, data_vencimento):
 
     sf = '%d/%m/%Y'
-    emissao = datetime.strptime(data_emissao, sf)
-    vencimento = datetime.strptime(data_vencimento, sf)
-    current = datetime.now()
+    emissao = datetime.strptime(data_emissao, sf).date()
+    vencimento = datetime.strptime(data_vencimento, sf).date()
+    current = datetime.now().date()
 
     if emissao > vencimento:
         return 'Inválido'

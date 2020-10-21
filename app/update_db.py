@@ -1,5 +1,8 @@
 import requests
 
+production_url = 'http://200.198.42.167/sync/updateTable'
+local = 'http://localhost:3001/sync/updateTable'
+
 
 def update_seguros(apolices):
     # Prepara o objeto no formato do endpoint para atualização de seguros, com table, table PK etc e o sgti_data que vem do formatData de cada entidade
@@ -32,9 +35,5 @@ def update_db(sgti_data, table):
         #apolices = sgti_data['apolices']
         # update_seguros(apolices)
 
-    if table == 'laudos':
-        request_data['table'] = 'laudo'
-
-    r = requests.post(
-        'http://localhost:3001/sync/updateTable', json=request_data)
+    r = requests.post(local, json=request_data)
     print(r.text, table)

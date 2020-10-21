@@ -13,7 +13,7 @@ fields = [
 
 ]
 
-steps = [7, 1, 4, 2]
+steps = [7, 1, 11, 13]
 
 del_key_words = ['ALTERAÇÃO', 'ALT\\.', 'JUCEMG', 'JUCESP', 'LICITAR', 'DESARQUIVAMENTO',
                  '\\(JU', 'DESATIVADA', 'CONTRATO', 'CADASTRO']
