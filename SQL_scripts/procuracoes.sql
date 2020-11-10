@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS public.procuracoes;
 CREATE TABLE public.procuracoes
 (
     procuracao_id smallint NOT NULL DEFAULT nextval('procuracoes_id_seq'::regclass),
-    codigo_empresa smallint,
+    codigo_empresa integer,
     status text COLLATE pg_catalog."default",
     vencimento date,
     procuradores jsonb,

@@ -4,10 +4,10 @@ from sys import argv
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from importlib import import_module
+from time import sleep
 
 from login import login
 from get_sgti_data import get_sgti_data
-from time import sleep
 from create_sql_table import create_sql_table
 from file_to_list import file_to_list
 from parse_data import parse_data
@@ -55,11 +55,14 @@ if one_day_old:
     sleep(2)
 
 # Change xls(sgti) file into a python list and updates if more than 1 dayold
-#collection = file_to_list(xls_file, one_day_old)
+# collection = file_to_list(xls_file, one_day_old)
 collection = file_to_list(xls_file, one_day_old)
 
-# Se o módulo for veículos, essa lista é para fazer 3 atualizações no loop no final dessa função, referentes às 3 tabelas do Postgresql para atualizar.
-# Optei por loop porque o arquivo do SGTI referente a veiculos, seguros e laudos é a mesma, depois é só rodar as validações e atualizações de tabela.
+# Se o módulo for veículos, essa lista é para fazer 3 atualizações no loop no final dessa função, referentes às
+# 3 tabelas do Postgresql para atualizar.
+# Optei por loop porque o arquivo do SGTI referente a veiculos, seguros e laudos é a mesma, depois é só rodar
+# as validações e atualizações de tabela.
+
 modules_to_update = []
 if module_name == 'veiculos':
     modules_to_update = ['veiculos', 'seguros', 'laudos']
