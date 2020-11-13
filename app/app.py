@@ -1,4 +1,5 @@
 import os
+import requests
 import datetime
 from sys import argv
 from selenium import webdriver
@@ -15,7 +16,6 @@ from update_db import update_db
 
 # Get input from user to import module
 module_name = argv[1]
-
 module_path = 'entities.' + module_name
 
 module = import_module(module_path, '.')
@@ -28,6 +28,17 @@ formatData = module.formatData
 
 xls_file = file_names['xls_file']
 xls_path = f'C:\\Users\\sandr\\Downloads\\{xls_file}'
+
+#set host (local / production)
+production_url = 'http://200.198.42.167'
+local = 'http://localhost:3001'
+
+host = local
+if len(argv) > 2:
+    if argv[2] == 'production':
+        host = production_url
+    print(host)
+
 
 # Check if file is older than 1 day:
 one_day_old = True
@@ -63,12 +74,10 @@ collection = file_to_list(xls_file, one_day_old)
 # Optei por loop porque o arquivo do SGTI referente a veiculos, seguros e laudos é a mesma, depois é só rodar
 # as validações e atualizações de tabela.
 
-modules_to_update = []
 if module_name == 'veiculos':
     modules_to_update = ['veiculos', 'seguros', 'laudos']
 else:
     modules_to_update = [module_name]
-
 
 for m in modules_to_update:
     # Declara e inicializa variáveis:
@@ -83,7 +92,11 @@ for m in modules_to_update:
     table_to_postgres = parse_data(collection, fields, formatData)
 
     # DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
-    create_sql_table(sql_file)
+    create_sql_table(sql_file, host)
     sleep(1)
     # Post the update request.
-    update_db(table_to_postgres, m)
+    update_db(table_to_postgres, m, host)
+
+if module_name == 'veiculos':
+    r = requests.get(host+'/sync/forceDbUpdate')
+    print(r.json)
