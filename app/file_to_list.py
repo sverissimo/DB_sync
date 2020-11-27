@@ -9,7 +9,7 @@ import datetime
 def file_to_list(xls_file_name, update_file):
 
     json_file = xls_file_name.replace('.xls', '.json')
-    print(json_file)
+    print(json_file, update_file)
 
     if update_file:
         f = open(f'C:\\Users\\sandr\\Downloads\\{xls_file_name}', 'r')
@@ -33,6 +33,7 @@ def file_to_list(xls_file_name, update_file):
         return result
 
     else:
+        print('getting old json file')
         f = open(f'C:\\Users\\sandr\\Downloads\\{json_file}',
                  'r', encoding='utf-8')
         result = json.load(f, encoding='utf-8-sig')

@@ -9,11 +9,12 @@ from time import sleep
 
 from login import login
 from get_sgti_data import get_sgti_data
+from get_old_vehicles import get_old_vehicles
 from create_sql_table import create_sql_table
 from file_to_list import file_to_list
 from parse_data import parse_data
 from update_db import update_db
-
+from update_mongo_db import update_mongo_db
 # Get input from user to import module
 module_name = argv[1]
 module_path = 'entities.' + module_name
@@ -34,10 +35,13 @@ production_url = 'http://200.198.42.167'
 local = 'http://localhost:3001'
 
 host = local
+include_old = False
 if len(argv) > 2:
     if argv[2] == 'production':
         host = production_url
-    print(host)
+    if argv[3] == 'include_old':
+        include_old = True
+    print(host, 'include_old; ', include_old)
 
 
 # Check if file is older than 1 day:
@@ -62,7 +66,12 @@ if one_day_old:
     login(browser, Keys)
 
     # navigates through SGTI to get xls file
-    get_sgti_data(browser, Keys, steps)
+    if include_old:
+        get_old_vehicles(browser, Keys)
+        print('shit')
+        ##exit()
+    else:
+        get_sgti_data(browser, Keys, steps)
     sleep(2)
 
 # Change xls(sgti) file into a python list and updates if more than 1 dayold
@@ -90,6 +99,11 @@ for m in modules_to_update:
 
     # Parse the list into the correct format/dataTypes of Postgresql DB
     table_to_postgres = parse_data(collection, fields, formatData)
+
+    if include_old:
+        print('updating mongo...')
+        update_mongo_db(host, table_to_postgres)
+        print('Mongo updated.')
 
     # DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
     create_sql_table(sql_file, host)
