@@ -98,12 +98,14 @@ for m in modules_to_update:
     sql_file = module.file_names['sql_file']
 
     # Parse the list into the correct format/dataTypes of Postgresql DB
-    table_to_postgres = parse_data(collection, fields, formatData)
+    table_to_postgres = parse_data(collection, fields, formatData, include_old)
+    #print(table_to_postgres)
 
     if include_old:
         print('updating mongo...')
         update_mongo_db(host, table_to_postgres)
         print('Mongo updated.')
+        exit()
 
     # DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
     create_sql_table(sql_file, host)

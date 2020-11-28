@@ -4,7 +4,7 @@ from field_conversor import field_conversor
 # Essa função faz um parsing básico e distribui para cada entidade fazer filtros específicos, depois retorna o resultado final para o update_DB
 
 
-def parse_data(collection, fields, formatData):
+def parse_data(collection, fields, formatData, include_old):
 
     parsed_data_SGTI = []
     newObj = {}
@@ -12,8 +12,9 @@ def parse_data(collection, fields, formatData):
     for obj in collection:
         #    if (obj['Situação'] != 'Inativo'):
         for f in obj:
-
-            new_f = field_conversor(f, fields)
+            new_f = f
+            if not include_old:
+                new_f = field_conversor(f, fields)
 
             if new_f is None or new_f == '':
                 continue
