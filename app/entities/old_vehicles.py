@@ -1,5 +1,3 @@
-import re
-
 file_names = {
     'xls_file': 'ConsultaVeiculos.xls',
     'sql_file': 'veiculos.sql'

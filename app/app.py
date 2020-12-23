@@ -3,6 +3,8 @@ import requests
 import datetime
 from sys import argv
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
 from selenium.webdriver.common.keys import Keys
 from importlib import import_module
 from time import sleep
@@ -15,6 +17,9 @@ from file_to_list import file_to_list
 from parse_data import parse_data
 from update_db import update_db
 from update_mongo_db import update_mongo_db
+
+
+# Usage: app.py <module_name> <environment> <include_old>
 # Get input from user to import module
 module_name = argv[1]
 module_path = 'entities.' + module_name
@@ -30,7 +35,7 @@ formatData = module.formatData
 xls_file = file_names['xls_file']
 xls_path = f'C:\\Users\\sandr\\Downloads\\{xls_file}'
 
-#set host (local / production)
+# set host (local / production)
 production_url = 'http://200.198.42.167'
 local = 'http://localhost:3001'
 
@@ -39,10 +44,11 @@ include_old = False
 if len(argv) > 2:
     if argv[2] == 'production':
         host = production_url
+if len(argv) > 3:
     if argv[3] == 'include_old':
         include_old = True
-    print(host, 'include_old; ', include_old)
 
+print(host, 'include_old; ', include_old)
 
 # Check if file is older than 1 day:
 one_day_old = True
@@ -62,14 +68,15 @@ if one_day_old:
         os.remove(xls_path)
 
     # create browser instance and pass to login function
-    browser = webdriver.Chrome()
+    # browser = webdriver.Chrome()
+    browser = webdriver.Chrome(ChromeDriverManager().install())
     login(browser, Keys)
 
     # navigates through SGTI to get xls file
     if include_old:
         get_old_vehicles(browser, Keys)
         print('shit')
-        ##exit()
+        # exit()
     else:
         get_sgti_data(browser, Keys, steps)
     sleep(2)
@@ -99,7 +106,7 @@ for m in modules_to_update:
 
     # Parse the list into the correct format/dataTypes of Postgresql DB
     table_to_postgres = parse_data(collection, fields, formatData, include_old)
-    #print(table_to_postgres)
+    # print(table_to_postgres)
 
     if include_old:
         print('updating mongo...')
