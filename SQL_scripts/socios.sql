@@ -16,6 +16,7 @@ CREATE TABLE public.socios
     email_socio text COLLATE pg_catalog."default",    
     tel_socio character varying(20) COLLATE pg_catalog."default",
     share numeric(5,2),
+    empresas text COLLATE pg_catalog."default",
     created_at timestamp with time zone DEFAULT now()    
 )
 WITH (

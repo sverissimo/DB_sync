@@ -13,7 +13,8 @@ CREATE TABLE public.procuradores
     nome_procurador text COLLATE pg_catalog."default",
     email_procurador text COLLATE pg_catalog."default",
     tel_procurador character varying(20) COLLATE pg_catalog."default",
-    cpf_procurador character varying(14) COLLATE pg_catalog."default",    
+    cpf_procurador character varying(14) COLLATE pg_catalog."default",
+    empresas integer[],
     created_at timestamp with time zone DEFAULT now(),
     CONSTRAINT procurador_pkey PRIMARY KEY (procurador_id)
 )

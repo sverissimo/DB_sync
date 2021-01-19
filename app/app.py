@@ -58,7 +58,7 @@ if os.path.exists(xls_path):
     m_time = datetime.datetime.fromtimestamp(xls_timestamp)
     today = datetime.datetime.now()
 
-    one_day_old = today - m_time > datetime.timedelta(1)
+    one_day_old = today - m_time > datetime.timedelta(100)
     print(one_day_old)
 
 # If older than 1 day, get new file from SGTI
@@ -106,7 +106,6 @@ for m in modules_to_update:
 
     # Parse the list into the correct format/dataTypes of Postgresql DB
     table_to_postgres = parse_data(collection, fields, formatData, include_old)
-    # print(table_to_postgres)
 
     if include_old:
         print('updating mongo...')
