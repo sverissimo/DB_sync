@@ -8,6 +8,7 @@ file_names = {
 fields = [
     ('Número Laudo', 'id'),
     ('Placa', 'placa'),
+    ('Código', 'codigo_empresa'),
     ('Empresa Laudo', 'empresa_laudo'),
     ('Validade Laudo', 'validade'),
 ]

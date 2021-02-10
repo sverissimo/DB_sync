@@ -58,7 +58,7 @@ if os.path.exists(xls_path):
     m_time = datetime.datetime.fromtimestamp(xls_timestamp)
     today = datetime.datetime.now()
 
-    one_day_old = today - m_time > datetime.timedelta(100)
+    one_day_old = today - m_time > datetime.timedelta(10)
     print(one_day_old)
 
 # If older than 1 day, get new file from SGTI
