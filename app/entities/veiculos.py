@@ -68,8 +68,9 @@ def formatData(data):
             d['obs'] = f'{ob}. Placa fictícia: {old_plate}'
             d['placa'] = new_plate
             i += 1
+            """
             if i < 10:
                 print(d)
-
+            """
     print('veiculos data parsed. ' + str(i) + ' new plates added.')
     return data

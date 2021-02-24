@@ -1,6 +1,10 @@
 import requests
 from compare_dates import compare_dates
+import os
 
+#Set headers
+auth = os.getenv("AUTH_SYNC")
+headers = {'authorization': auth}
 
 file_names = {
     'xls_file': 'ConsultaVeiculos.xls',
@@ -19,7 +23,7 @@ fields = [
 
 steps = [7, 2, 29, 33]
 
-seguradoras = requests.get('http://localhost:3001/api/seguradoras').json()
+seguradoras = requests.get('http://localhost:3001/api/seguradoras', headers=headers).json()
 
 filtered_insurances = []
 apolices = []

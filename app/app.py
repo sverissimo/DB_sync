@@ -18,6 +18,8 @@ from parse_data import parse_data
 from update_db import update_db
 from update_mongo_db import update_mongo_db
 
+from dotenv import load_dotenv
+load_dotenv()
 
 # Usage: app.py <module_name> <environment> <include_old>
 # Get input from user to import module
@@ -39,6 +41,10 @@ xls_path = f'C:\\Users\\sandr\\Downloads\\{xls_file}'
 production_url = 'http://200.198.42.167'
 local = 'http://localhost:3001'
 
+#Set headers
+auth = os.getenv("AUTH_SYNC")
+headers = {'authorization': auth}
+
 host = local
 include_old = False
 if len(argv) > 2:
@@ -58,7 +64,7 @@ if os.path.exists(xls_path):
     m_time = datetime.datetime.fromtimestamp(xls_timestamp)
     today = datetime.datetime.now()
 
-    one_day_old = today - m_time > datetime.timedelta(10)
+    one_day_old = today - m_time > datetime.timedelta(1)
     print(one_day_old)
 
 # If older than 1 day, get new file from SGTI
@@ -109,16 +115,16 @@ for m in modules_to_update:
 
     if include_old:
         print('updating mongo...')
-        update_mongo_db(host, table_to_postgres)
+        update_mongo_db(host, headers, table_to_postgres)
         print('Mongo updated.')
         exit()
 
     # DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
-    create_sql_table(sql_file, host)
+    create_sql_table(sql_file, host, headers)
     sleep(1)
     # Post the update request.
-    update_db(table_to_postgres, m, host)
+    update_db(table_to_postgres, m, host, headers)
 
 if module_name == 'veiculos':
-    r = requests.get(host+'/sync/forceDbUpdate')
+    r = requests.get(host+'/sync/forceDbUpdate', headers=headers)
     print(r.json)

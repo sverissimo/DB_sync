@@ -12,6 +12,7 @@ CREATE TABLE public.empresas
     vencimento_contrato date,
     cnpj text COLLATE pg_catalog."default",
     inscricao_estadual text COLLATE pg_catalog."default",
+    numero_contrato text COLLATE pg_catalog."default",
     rua text COLLATE pg_catalog."default",
     cidade text COLLATE pg_catalog."default",
     uf text COLLATE pg_catalog."default",

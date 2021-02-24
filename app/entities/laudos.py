@@ -1,4 +1,9 @@
 import requests
+import os
+
+#Set headers
+auth = os.getenv("AUTH_SYNC")
+headers = {'authorization': auth}
 
 file_names = {
     'xls_file': 'ConsultaVeiculos.xls',
@@ -14,13 +19,13 @@ fields = [
 ]
 
 steps = [7, 2, 29, 33]
-
-veiculos = requests.get('http://localhost:3001/api/veiculos').json()
+veiculos = requests.get('http://localhost:3001/api/veiculos', headers=headers).json()
 empresas_laudo = requests.get(
-    'http://localhost:3001/api/empresasLaudo').json()
+    'http://localhost:3001/api/empresasLaudo', headers=headers).json()
 
 
 def formatData(data):
+
     laudos = []
     for d in data:
         for v in veiculos:
