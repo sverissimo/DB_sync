@@ -1,10 +1,11 @@
-import sys
 from datetime import datetime
 
 
 def compare_dates(data_emissao, data_vencimento):
 
-    sf = '%d/%m/%Y'
+    # sf = '%d/%m/%Y'
+    # New dateFormat from new version of SGTI:
+    sf = '%Y-%m-%d'
     emissao = datetime.strptime(data_emissao, sf).date()
     vencimento = datetime.strptime(data_vencimento, sf).date()
     current = datetime.now().date()

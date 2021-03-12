@@ -42,8 +42,16 @@ fields = [
     ('Observação', 'obs')
 ]
 
-steps = [7, 2, 29, 33]
+#old_steps = [7, 2, 29, 33]
+steps = [4, 3, 3, 25, 29]
 
+#Converte a string em kg para string em ton
+def kg_to_ton(weight):
+    kg = weight.replace('.', '')
+    kg = int(kg)
+    ton = kg/1000
+    ton = str(ton)
+    return ton
 
 def formatData(data):
     i = 0
@@ -54,12 +62,17 @@ def formatData(data):
             d['dominio'] = 'Veículo próprio'
         d['modelo_chassi'] = d['modelo_chassi'].replace('0 500 R eliminar', '0500 R').replace(
             'OF 1722/59 eliminar', 'OF-1722/59').replace(' - ', '-').replace('OF 1722', 'OF-1722').replace(
-            '0500 RS 1836/30 eliminar', 'O-500 RS 1836/30')
+            '0500 RS 1836/30 eliminar', 'O-500 RS 1836/30').replace('OF - 1722', 'OF-1722')
 
         d['modelo_carroceria'] = d['modelo_carroceria'].upper()
 
         # Se houver placa mercosul no campo obs, traz direto p cá
         new_plate = get_mercosul_plate(d['obs'])
+
+        #Altera kg para tonelada em pesodianteiro/traseiro e pbt
+        for key in d:
+            if key == 'peso_dianteiro' or key == 'peso_traseiro' or key== 'pbt':
+                d[key] = kg_to_ton(d[key])
 
         # Acrescenta placa antiga na observação e atualiza a placa do veículo.
         if new_plate:

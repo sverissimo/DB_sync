@@ -58,12 +58,12 @@ CREATE TABLE public.veiculos
         REFERENCES public.modelo_carroceria (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-        NOT VALID,
-    CONSTRAINT modelo_chassi FOREIGN KEY (modelo_chassi_id)
+        NOT VALID
+    /* CONSTRAINT modelo_chassi FOREIGN KEY (modelo_chassi_id)
         REFERENCES public.modelo_chassi (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION
-        NOT VALID
+        NOT VALID */
 )
 WITH (
     OIDS = FALSE

@@ -3,30 +3,42 @@ from time import sleep
 
 
 def get_sgti_data(browser, Keys, steps):
+    #Navbar menu
     actions = ActionChains(browser)
-
     sleep(2)
     for _ in range(steps[0]):
         actions = actions.send_keys(Keys.TAB)
     actions.perform()
-    print('consultas')
 
+    #Consultas
     actions = ActionChains(browser)
     sleep(1)
-    actions = actions.send_keys(Keys.RETURN)
+    for _ in range(steps[1]):
+        actions = actions.send_keys(Keys.ARROW_RIGHT)
     actions.perform()
 
-    sleep(1)
+    #Veiculos
     actions = ActionChains(browser)
-    if steps[1] > 0:
-        for _ in range(steps[1]):
+    sleep(1)
+    for _ in range(steps[2]):
+        actions = actions.send_keys(Keys.ARROW_DOWN)
+    actions = actions.send_keys(Keys.RETURN)
+    actions.perform()
+    print('consultas>>veiculos')
+
+    #Pesquisar
+    sleep(3)
+    actions = ActionChains(browser)
+    if steps[3] > 0:
+        for _ in range(steps[3]):
             actions = actions.send_keys(Keys.TAB)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
 
-    sleep(1)
+    #Baixar excel
+    sleep(5)
     actions = ActionChains(browser)
-    for _ in range(steps[2]):
+    for _ in range(steps[4]):
         actions = actions.send_keys(Keys.TAB)
     print('entity')
     actions.perform()
@@ -35,20 +47,19 @@ def get_sgti_data(browser, Keys, steps):
     actions = ActionChains(browser)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
-
-    sleep(1)
-    for _ in range(steps[3]):
-
-        actions = actions.send_keys(Keys.TAB)
-    actions.perform()
     print('downloaded.')
 
+    sleep(14)
+    browser.close()
+
+    """
     sleep(2)
     actions = ActionChains(browser)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
     sleep(15)
     browser.close()
+    """
 
     """
     for _ in range(13):
