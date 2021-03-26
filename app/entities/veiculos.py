@@ -1,4 +1,6 @@
 from get_mercosul_plate import get_mercosul_plate
+from format_placa import format_placa
+
 
 file_names = {
     'xls_file': 'ConsultaVeiculos.xls',
@@ -42,10 +44,11 @@ fields = [
     ('Observação', 'obs')
 ]
 
-#old_steps = [7, 2, 29, 33]
+# old_steps = [7, 2, 29, 33]
 steps = [4, 3, 3, 25, 29]
 
-#Converte a string em kg para string em ton
+
+# Converte a string em kg para string em ton
 def kg_to_ton(weight):
     kg = weight.replace('.', '')
     kg = int(kg)
@@ -53,9 +56,12 @@ def kg_to_ton(weight):
     ton = str(ton)
     return ton
 
+
 def formatData(data):
     i = 0
     for d in data:
+        if d['placa'][3] != '-':
+            d['placa'] = format_placa(d['placa'])
         if d['dominio'] == 'Sim':
             d['dominio'] = 'Leasing'
         if d['dominio'] == 'Não':
@@ -69,9 +75,9 @@ def formatData(data):
         # Se houver placa mercosul no campo obs, traz direto p cá
         new_plate = get_mercosul_plate(d['obs'])
 
-        #Altera kg para tonelada em pesodianteiro/traseiro e pbt
+        # Altera kg para tonelada em pesodianteiro/traseiro e pbt
         for key in d:
-            if key == 'peso_dianteiro' or key == 'peso_traseiro' or key== 'pbt':
+            if key == 'peso_dianteiro' or key == 'peso_traseiro' or key == 'pbt':
                 d[key] = kg_to_ton(d[key])
 
         # Acrescenta placa antiga na observação e atualiza a placa do veículo.

@@ -1,7 +1,9 @@
 import requests
 import os
+from format_placa import format_placa
 
-#Set headers
+
+# Set headers
 auth = os.getenv("AUTH_SYNC")
 headers = {'authorization': auth}
 
@@ -28,6 +30,8 @@ def formatData(data):
 
     laudos = []
     for d in data:
+        if d['placa'][3] != '-':
+            d['placa'] = format_placa(d['placa'])
         for v in veiculos:
             if d['placa'] == v['placa']:
                 d['veiculo_id'] = v['veiculo_id']
