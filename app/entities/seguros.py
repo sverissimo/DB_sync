@@ -1,8 +1,11 @@
-import requests
-from compare_dates import compare_dates
 import os
+import requests
+from time import sleep
+from create_missing_entry import create_missing_entry
+from compare_dates import compare_dates
 
-#Set headers
+
+# Set headers
 auth = os.getenv("AUTH_SYNC")
 headers = {'authorization': auth}
 
@@ -31,16 +34,16 @@ apolices = []
 
 def formatData(data):
     # Retorna uma lista de dicts no formato [{apolice: <nApolice>, placas:[<lista de placas>]}]
-    print('formatData started')
-    print(data[0])
-    for d in data:
-        d['seguradora'] = d['seguradora'].strip()
-        d['seguradora'] = d['seguradora'].replace('S/A', 'S.A.')
-        d['seguradora'] = d['seguradora'].replace('SA', 'S.A.')
-        d['seguradora'] = d['seguradora'].replace('  ', ' ')
+    print('formatData started -- seguros')
 
-        for s in seguradoras:
-            if d['seguradora'] == s['seguradora']:
+    # Se houver alguma seguradora nova, inserir no DB do CadTI antes p pegar o id depois
+    data = create_missing_entry('seguradora', 'seguradora', seguradoras, data)
+    updated_seguradoras = requests.get('http://localhost:3001/api/seguradoras', headers=headers).json()
+
+    for d in data:
+        seguradora = d['seguradora']
+        for s in updated_seguradoras:
+            if seguradora == s['seguradora']:
                 d['seguradora_id'] = s['id']
 
         d['situacao'] = compare_dates(d['data_emissao'], d['vencimento'])
@@ -58,7 +61,7 @@ def formatData(data):
     for i in filtered_insurances:
         if 'seguradora_id' not in i:
             i['seguradora_id'] = 'NULL'
-            print(i)
+            # print(i)
 
         vehicles = []
         for d in data:
@@ -70,5 +73,4 @@ def formatData(data):
         del i['placa']
 
     data_to_return = {'apolices': apolices, 'seguros': filtered_insurances}
-
     return data_to_return

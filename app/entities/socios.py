@@ -14,7 +14,7 @@ fields = [
 
 ]
 
-steps = [7, 1, 11, 13]
+steps = [4, 3, 2, 7, 9]
 # Termos considerados lixo na tabela do SGTI para apagar
 del_key_words = ['ALTERAÇÃO', 'ALT\\.', 'JUCEMG', 'JUCESP', 'LICITAR', 'DESARQUIVAMENTO',
                  '\\(JU', 'DESATIVADA', 'CONTRATO', 'CADASTRO']

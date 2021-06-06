@@ -1,8 +1,8 @@
 from bs4 import BeautifulSoup as soup
-import re
 import json
-import os
-import datetime
+# import os
+# import re
+
 # Pega o arquivo excel(tabela html na verdade) baixado do SGTI e transforma em uma list de dictionaries
 
 

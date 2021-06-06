@@ -41,7 +41,7 @@ xls_path = f'C:\\Users\\sandr\\Downloads\\{xls_file}'
 production_url = 'http://200.198.42.167'
 local = 'http://localhost:3001'
 
-#Set headers
+# Set headers
 auth = os.getenv("AUTH_SYNC")
 headers = {'authorization': auth}
 

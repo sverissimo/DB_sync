@@ -3,21 +3,21 @@ from time import sleep
 
 
 def get_sgti_data(browser, Keys, steps):
-    #Navbar menu
+    # Navbar menu
     actions = ActionChains(browser)
     sleep(2)
     for _ in range(steps[0]):
         actions = actions.send_keys(Keys.TAB)
     actions.perform()
 
-    #Consultas
+    # Consultas
     actions = ActionChains(browser)
     sleep(1)
     for _ in range(steps[1]):
         actions = actions.send_keys(Keys.ARROW_RIGHT)
     actions.perform()
 
-    #Veiculos
+    # Veiculos
     actions = ActionChains(browser)
     sleep(1)
     for _ in range(steps[2]):
@@ -26,7 +26,7 @@ def get_sgti_data(browser, Keys, steps):
     actions.perform()
     print('consultas>>veiculos')
 
-    #Pesquisar
+    # Pesquisar
     sleep(3)
     actions = ActionChains(browser)
     if steps[3] > 0:
@@ -35,7 +35,7 @@ def get_sgti_data(browser, Keys, steps):
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
 
-    #Baixar excel
+    # Baixar excel
     sleep(5)
     actions = ActionChains(browser)
     for _ in range(steps[4]):
