@@ -39,3 +39,5 @@ def update_db(sgti_data, table, host, headers):
 
     r = requests.post(host+'/sync/updateTable', json=request_data, headers=headers)
     print(r.text, table)
+    new_backup = requests.get(host+'/sync/createRestorePoint', headers=headers)
+    print(new_backup.text)

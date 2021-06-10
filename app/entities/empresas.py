@@ -29,7 +29,12 @@ def formatData(data):
     for d in data:
         d['cnpj'] = format_cnpj(d['cnpj'])
 
-        d['razao_social'] = d['razao_social'].replace(
-            'LOPES E CIA LTDA.', 'LOPES & CIA LTDA')
+        d['razao_social'] = (
+            d['razao_social']
+            .replace('LOPES E CIA LTDA.', 'LOPES & CIA LTDA')
+            .replace('(Desativada)', '')
+                             )
+        d['situacao'] = d['situacao'].replace('Inativo', 'Desativada')
+
     print(len(data))
     return data
