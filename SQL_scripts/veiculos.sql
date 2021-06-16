@@ -19,6 +19,7 @@ CREATE TABLE public.veiculos
     utilizacao text COLLATE pg_catalog."default",
     dominio text COLLATE pg_catalog."default",
     apolice text COLLATE pg_catalog."default",
+    numero_laudo character varying(30) COLLATE pg_catalog."default",
     cilindros smallint,
     potencia smallint,
     n_chassi character varying(25) COLLATE pg_catalog."default",

@@ -20,6 +20,7 @@ fields = [
     ('Situação', 'situacao'),
     ('Leasing', 'dominio'),
     ('Apólice', 'apolice'),
+    ('Número Laudo', 'numero_laudo'),
     ('Empresas autorizadas a compartilhar', 'delegatario_compartilhado'),
     ('Poltronas', 'poltronas'),
     ('Eixos', 'eixos'),
