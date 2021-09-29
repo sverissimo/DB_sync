@@ -20,7 +20,9 @@ fields = [
     ('Validade Laudo', 'validade'),
 ]
 
-steps = [7, 2, 29, 33]
+# oldsteps = [7, 2, 29, 33]
+steps = [4, 3, 3, 25, 29]
+
 veiculos = requests.get('http://localhost:3001/api/veiculos', headers=headers).json()
 empresas_laudo = requests.get(
     'http://localhost:3001/api/empresasLaudo', headers=headers).json()

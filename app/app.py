@@ -125,6 +125,10 @@ for m in modules_to_update:
     # Post the update request.
     update_db(table_to_postgres, m, host, headers)
 
+# Atualiza o status dos veículos com base nas datas de seguro e laudo e cria um restorePont do DB
 if module_name == 'veiculos':
     r = requests.get(host+'/sync/forceDbUpdate', headers=headers)
     print(r.json)
+    new_backup = requests.get(host+'/sync/createRestorePoint', headers=headers)
+    print(new_backup.text)
+

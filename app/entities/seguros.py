@@ -24,7 +24,8 @@ fields = [
     ('Placa', 'placa')
 ]
 
-steps = [7, 2, 29, 33]
+# oldsteps = [7, 2, 29, 33]
+steps = [4, 3, 3, 25, 29]
 
 seguradoras = requests.get('http://localhost:3001/api/seguradoras', headers=headers).json()
 
