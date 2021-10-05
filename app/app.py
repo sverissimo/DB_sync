@@ -35,7 +35,8 @@ steps = module.steps
 formatData = module.formatData
 
 xls_file = file_names['xls_file']
-xls_path = f'C:\\Users\\sandr\\Downloads\\{xls_file}'
+user_folder = os.getenv("USER_FOLDER")
+xls_path = f'C:\\Users\\{user_folder}\\Downloads\\{xls_file}'
 
 # set host (local / production)
 production_url = 'http://200.198.42.167'
@@ -89,7 +90,7 @@ if one_day_old:
 
 # Change xls(sgti) file into a python list and updates if more than 1 dayold
 # collection = file_to_list(xls_file, one_day_old)
-collection = file_to_list(xls_file, one_day_old)
+collection = file_to_list(user_folder, xls_file, one_day_old)
 
 # Se o módulo for veículos, essa lista é para fazer 3 atualizações no loop no final dessa função, referentes às
 # 3 tabelas do Postgresql para atualizar.
@@ -120,7 +121,7 @@ for m in modules_to_update:
         exit()
 
     # DROPS (if exists) and creates a SQL table in PostgreSql from a sgit xls (html) file
-    create_sql_table(sql_file, host, headers)
+    create_sql_table(user_folder, sql_file, host, headers)
     sleep(1)
     # Post the update request.
     update_db(table_to_postgres, m, host, headers)
