@@ -9,8 +9,8 @@ CREATE TABLE public.laudos
     empresa_id smallint,
     codigo_empresa integer,
     veiculo_id integer,
-    created_at timestamp with time zone DEFAULT now(),
-    CONSTRAINT laudos_pkey PRIMARY KEY (id)
+    created_at timestamp with time zone DEFAULT now()
+    --CONSTRAINT laudos_pkey PRIMARY KEY (id)
 )
 WITH (
     OIDS = FALSE
