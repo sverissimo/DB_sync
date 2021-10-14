@@ -1,10 +1,12 @@
+import os
 import requests
-from pathlib import Path
 from send_mail import send_mail
 
 
 def create_sql_table(user_folder, sql_file, host, headers):
-    path_to_file = f'../SQL_scripts/{sql_file}'
+    path = os.getenv('DB_SYNC_PATH_PY')
+    print('path', path)
+    path_to_file = f'{path}\\SQL_scripts\\{sql_file}'
     create_empresas_table = open(path_to_file, 'r')
     empresas_query = create_empresas_table.read()
 

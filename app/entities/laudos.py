@@ -15,6 +15,7 @@ file_names = {
 fields = [
     ('Número Laudo', 'id'),
     ('Placa', 'placa'),
+    ('RENAVAM', 'renavam'),
     ('Código', 'codigo_empresa'),
     ('Empresa Laudo', 'empresa_laudo'),
     ('Validade Laudo', 'validade'),
@@ -41,16 +42,17 @@ def formatData(data):
         if d['placa'][3] != '-':
             d['placa'] = format_placa(d['placa'])
         for v in veiculos:
-            if d['placa'] == v['placa']:
+            if d['placa'] == v['placa'] or d['renavam'] == v['renavam']:
                 d['veiculo_id'] = v['veiculo_id']
         for e in updated_empresas_laudo:
             if d['empresa_laudo'] == e['empresa']:
                 d['empresa_id'] = e['id']
         del d['placa']
         del d['empresa_laudo']
+        del d['renavam']
         if d['id'] and d not in laudos:
             laudos.append(d)
-            if d['id'] == '000008654-19':
-                print(d)
+    filtered_laudos = list(filter(lambda laudo: 'veiculo_id' in laudo, laudos))
+
     print('laudos data parsed.')
-    return laudos
+    return filtered_laudos
