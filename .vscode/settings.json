@@ -1,0 +1,13 @@
+{
+    "cSpell.words": [
+        "dotenv",
+        "emissao",
+        "errc",
+        "errh",
+        "errt",
+        "lxml",
+        "renavam",
+        "sgti"
+    ],
+    "python.formatting.provider": "black"
+}
