@@ -1,5 +1,5 @@
 from datetime import datetime
-import api
+from controller import api
 
 
 def send_mail(message):

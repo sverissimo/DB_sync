@@ -2,7 +2,7 @@ import json
 import os
 import requests
 from dotenv import load_dotenv
-import send_mail
+from services.send_mail import send_mail
 
 load_dotenv()
 

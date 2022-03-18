@@ -1,5 +1,5 @@
 import os
-import api
+from controller import api
 
 
 def create_sql_table(sql_file):

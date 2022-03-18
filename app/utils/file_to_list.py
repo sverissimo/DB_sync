@@ -1,13 +1,9 @@
 from bs4 import BeautifulSoup as soup
 import json
 
-# import os
-# import re
 
 # Pega o arquivo excel(tabela html na verdade) baixado do SGTI e transforma em uma list de dictionaries
-
-
-def file_to_list(user_folder, xls_file_name, update_file):
+def file_to_list(user_folder: str, xls_file_name: str, update_file: bool):
 
     json_file = xls_file_name.replace(".xls", ".json")
     print(json_file, update_file)

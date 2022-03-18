@@ -1,6 +1,6 @@
 from typing import List, Any
 import os
-import api
+from controller import api
 
 # Set headers
 auth = os.getenv("AUTH_SYNC")

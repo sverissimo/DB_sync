@@ -1,4 +1,4 @@
-import api
+from controller import api
 
 
 def update_seguros(apolices):

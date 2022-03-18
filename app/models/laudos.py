@@ -1,7 +1,7 @@
 import os
-import api
-from format_placa import format_placa
-from create_missing_entry import create_missing_entry
+from controller import api
+from utils.format_placa import format_placa
+from services.create_missing_entry import create_missing_entry
 
 # Set headers
 auth = os.getenv("AUTH_SYNC")

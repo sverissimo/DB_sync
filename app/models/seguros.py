@@ -1,7 +1,7 @@
 import os
-import api
-from create_missing_entry import create_missing_entry
-from compare_dates import compare_dates
+from controller import api
+from services.create_missing_entry import create_missing_entry
+from utils.compare_dates import compare_dates
 
 
 # Set headers

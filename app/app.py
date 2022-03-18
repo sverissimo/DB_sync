@@ -9,14 +9,15 @@ from importlib import import_module
 from time import sleep
 from dotenv import load_dotenv
 
-from login import login
-from get_sgti_data import get_sgti_data
-from get_old_vehicles import get_old_vehicles
-from create_sql_table import create_sql_table
-from file_to_list import file_to_list
-from parse_data import parse_data
-from update_db import update_db
-import api
+from sgti_api.login import login
+from sgti_api.get_sgti_data import get_sgti_data
+from sgti_api.get_old_vehicles import get_old_vehicles
+from services.create_sql_table import create_sql_table
+from services.update_db import update_db
+from utils.file_to_list import file_to_list
+from utils.parse_data import parse_data
+
+from controller import api
 
 
 load_dotenv()
@@ -24,7 +25,7 @@ load_dotenv()
 # Usage: app.py <module_name> <environment> <include_old>
 # Get input from user to import module
 module_name = argv[1]
-module_path = "entities." + module_name
+module_path = "models." + module_name
 
 
 module = import_module(module_path, ".")
@@ -107,7 +108,7 @@ else:
 
 for table_name in tables_to_update:
     # Declara e inicializa variáveis:
-    module_path = "entities." + table_name
+    module_path = "models." + table_name
     module = import_module(module_path, ".")
 
     fields = module.fields

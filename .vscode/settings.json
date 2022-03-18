@@ -1,13 +1,19 @@
 {
     "cSpell.words": [
+        "dominio",
         "dotenv",
         "emissao",
         "errc",
         "errh",
         "errt",
+        "JUCEMG",
+        "JUCESP",
         "lxml",
         "renavam",
-        "sgti"
+        "Rldc",
+        "sgti",
+        "sipro",
+        "utilizacao"
     ],
     "python.formatting.provider": "black"
 }
