@@ -2,7 +2,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from time import sleep
 
 
-def get_sgti_data(browser, Keys, steps):
+def download_sgti_data(browser, Keys, steps):
     # Navbar menu
     actions = ActionChains(browser)
     sleep(2)
@@ -24,7 +24,7 @@ def get_sgti_data(browser, Keys, steps):
         actions = actions.send_keys(Keys.ARROW_DOWN)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
-    print('consultas>>veiculos')
+    print("consultas>>veiculos")
 
     # Pesquisar
     sleep(3)
@@ -40,14 +40,14 @@ def get_sgti_data(browser, Keys, steps):
     actions = ActionChains(browser)
     for _ in range(steps[4]):
         actions = actions.send_keys(Keys.TAB)
-    print('entity')
+    print("entity")
     actions.perform()
 
     sleep(1)
     actions = ActionChains(browser)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
-    print('downloaded.')
+    print("downloaded.")
 
     sleep(14)
     browser.close()
