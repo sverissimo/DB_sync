@@ -1,16 +1,17 @@
-import os
 from controller import api
+from config import env
 
 
 def create_sql_table(sql_file):
-    path = os.getenv("DB_SYNC_PATH_PY")
-    print("path", path)
-    path_to_file = f"{path}\\SQL_scripts\\{sql_file}"
-    create_empresas_table = open(path_to_file, "r")
-    empresas_query = create_empresas_table.read()
+    path = env.SQL_SCRIPTS_FOLDER
+    path_to_file = f"{path}\\{sql_file}"
 
-    query = {"query": empresas_query}
-    # print(query)
+    with open(path_to_file, "r") as f:
+        query_string = f.read()
+        query = {"query": query_string}
 
-    api.post("sync/createTable", query)
-    print(sql_file)
+        print(f"Now reading {sql_file} script...")
+
+        api.post("sync/createTable", query)
+
+        return query

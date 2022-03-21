@@ -1,4 +1,3 @@
-import json
 import os
 import requests
 from dotenv import load_dotenv
@@ -13,7 +12,7 @@ HOST = os.getenv("HOST")
 proxies = {"http": None, "https": None} if os.getenv("ENV") == "development" else None
 
 
-def get(endpoint: str):
+def get(endpoint):
     url = HOST + endpoint
     response = requests.get(url, headers=HEADERS, proxies=proxies, verify=False)
     response_type = response.headers.get("content-type")
@@ -24,7 +23,7 @@ def get(endpoint: str):
         return response.text
 
 
-def post(endpoint: str, data: json):
+def post(endpoint, data):
     url = HOST + endpoint
 
     try:
@@ -52,7 +51,7 @@ def post(endpoint: str, data: json):
         send_mail("OOps: Something Else happened...")
 
 
-def put(endpoint: str, data: json):
+def put(endpoint, data):
     url = HOST + endpoint
     response = requests.put(
         url, json=data, headers=HEADERS, proxies=proxies, verify=False
@@ -60,7 +59,7 @@ def put(endpoint: str, data: json):
 
     response_type = response.headers.get("content-type")
 
-    if "application/json" in response_type:
+    if "application/json" in str(response_type):
         return response.json()
     else:
         return response.text
