@@ -31,6 +31,7 @@ def download_sgti_data(browser, Keys, steps):
     actions = ActionChains(browser)
     if steps[3] > 0:
         for _ in range(steps[3]):
+            sleep(0.3)
             actions = actions.send_keys(Keys.TAB)
     actions = actions.send_keys(Keys.RETURN)
     actions.perform()
@@ -39,6 +40,7 @@ def download_sgti_data(browser, Keys, steps):
     sleep(5)
     actions = ActionChains(browser)
     for _ in range(steps[4]):
+        sleep(0.3)
         actions = actions.send_keys(Keys.TAB)
     print("entity")
     actions.perform()

@@ -23,6 +23,7 @@ def main(entity):
         "steps": module.steps,
         "formatData": module.formatData,
     }
+
     data = None
     sgti_file_folder = env.SGTI_FILE_FOLDER
 
@@ -34,16 +35,15 @@ def main(entity):
         xls_file = model["file_names"]["xls_file"]
         data = file_to_list(sgti_file_folder, xls_file, update_file=False)
 
-    sql_file = module.file_names["sql_file"]
-
     db_formatted_data = parse_data(data, model)
 
     # Veículos baixados ficam armazenados no MongoDB
     if model["name"] == "old_vehicles":
-        api.post("/sync/oldVehicles", db_formatted_data)
+        api.post("sync/oldVehicles", db_formatted_data)
         print("Mongo updated.")
         exit()
 
+    sql_file = module.file_names["sql_file"]
     create_sql_table(sql_file)
     update_db(db_formatted_data, table=entity)
 
@@ -53,6 +53,7 @@ def main(entity):
         main("laudos")
         api.get("sync/forceDbUpdate")
         api.get("sync/createRestorePoint")
+        exit()
 
 
 # Usage: app.py <entity>

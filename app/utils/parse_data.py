@@ -9,11 +9,8 @@ def parse_data(collection, model):
     parsed_data_SGTI = []
     newObj = {}
     name = model["name"]
-    print("name: ", name)
     fields = model["fields"]
-    print("fields: ", fields)
     formatData = model["formatData"]
-    print("formatData: ", formatData)
 
     for obj in collection:
         #    if (obj['Situação'] != 'Inativo'):
@@ -40,11 +37,3 @@ def parse_data(collection, model):
     final_data = formatData(parsed_data_SGTI)
 
     return final_data
-
-
-""" 
-    i = 1
-    for k in final_data:
-        print(i, k)
-        i += 1
- """

@@ -1,4 +1,4 @@
-file_names = {"xls_file": "ConsultaVeiculos.xls", "sql_file": "veiculos.sql"}
+file_names = {"xls_file": "OldVehicles.xls", "sql_file": "veiculos.sql"}
 
 # Os demais fields ficam com a formatação da planilha, armazenados no MongoDB
 fields = [
@@ -22,6 +22,6 @@ def formatData(data):
 
     filtered_data = [d for i, d in enumerate(data) if i not in indexes]
 
-    print(len(filtered_data), len(indexes))
-    print("veiculos data parsed.")
+    print(f"{len(filtered_data)} shut down, {len(indexes)} vehicles still active.")
+    print("Old vehicles data parsed.")
     return filtered_data

@@ -26,4 +26,4 @@ def update_db(sgti_data, table):
         # update_seguros(apolices)
 
     api.post("sync/updateTable", request_data)
-    print(table)
+    print(f"{table} updated.")

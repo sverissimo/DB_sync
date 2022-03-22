@@ -1,8 +1,10 @@
 import os
 import requests
+import urllib3
 from dotenv import load_dotenv
 from services.send_mail import send_mail
 
+urllib3.disable_warnings()
 load_dotenv()
 
 __AUTH = os.getenv("AUTH_SYNC")
