@@ -23,5 +23,5 @@ def formatData(data):
     filtered_data = [d for i, d in enumerate(data) if i not in indexes]
 
     print(f"{len(filtered_data)} shut down, {len(indexes)} vehicles still active.")
-    print("Old vehicles data parsed.")
+    print(" Old vehicles data parsed.")
     return filtered_data

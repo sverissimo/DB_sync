@@ -94,5 +94,5 @@ def formatData(data):
             if i < 10:
                 print(d)
             """
-    print("veiculos data parsed. " + str(i) + " new plates added.")
+    print(" veiculos data parsed. " + str(i) + " new plates added.")
     return data

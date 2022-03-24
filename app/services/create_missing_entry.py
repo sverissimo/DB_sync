@@ -1,35 +1,22 @@
-from typing import List, Any
-import os
+from typing import List
 from controller import api
-
-# Set headers
-auth = os.getenv("AUTH_SYNC")
-headers = {"authorization": auth}
+from utils.sanitize import sanitize_value
 
 
-def sanitize(value):
-    # Sanitize dos strings de nome de seguradora padronizando/trim e evitando caracteres especiais
-    value = value.strip()
-    value = value.replace("S/A", "S.A.")
-    value = value.replace("SA", "S.A.")
-    value = value.replace("  ", " ")
-    return value
-
-
-def create_missing_entry(table: str, column: str, raw_collection: Any, data: List[Any]):
+def create_missing_entry(table, column, raw_collection, data):
     insert_obj = {"table": table}
     collection: List[str] = list(map(lambda el: el[column], raw_collection))
 
     for d in data:
         if column in d:
-            d[column] = sanitize(d[column])
+            d[column] = sanitize_value(d[column])
             value = d[column]
         elif table == "empresa_laudo":
             value = d["empresa_laudo"]
         if value and value not in collection:
             collection.append(value)
             insert_obj["requestElement"] = {column: value}
-            print(value)
-            print(insert_obj)
+            print(f" Found new value in SGTI, posted to table {table}: {value}")
+            # print(insert_obj)
             api.post("api/addElement", insert_obj)
     return data

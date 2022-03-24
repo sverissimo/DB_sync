@@ -1,11 +1,6 @@
-import os
 from controller import api
 from utils.format_placa import format_placa
 from services.create_missing_entry import create_missing_entry
-
-# Set headers
-auth = os.getenv("AUTH_SYNC")
-headers = {"authorization": auth}
 
 file_names = {"xls_file": "ConsultaVeiculos.xls", "sql_file": "laudos.sql"}
 
@@ -21,13 +16,13 @@ fields = [
 # oldsteps = [7, 2, 29, 33]
 steps = [4, 3, 3, 25, 29]
 
-veiculos = api.get("api/veiculos")
-empresas_laudo = api.get("api/empresasLaudo")
-
 
 def formatData(data):
+    veiculos = api.get("api/veiculos")
+    empresas_laudo = api.get("api/empresasLaudo")
+
     # Retorna uma lista de dicts no formato [{apolice: <nApolice>, placas:[<lista de placas>]}]
-    print("formatData started -- laudos")
+    print(" formatData started -- laudos")
 
     # Se houver alguma seguradora nova, inserir no DB do CadTI antes p pegar o id depois
     data = create_missing_entry("empresa_laudo", "empresa", empresas_laudo, data)
@@ -48,7 +43,8 @@ def formatData(data):
         del d["renavam"]
         if d["id"] and d not in laudos:
             laudos.append(d)
+
     filtered_laudos = list(filter(lambda laudo: "veiculo_id" in laudo, laudos))
 
-    print("laudos data parsed.")
+    print(" laudos data parsed.")
     return filtered_laudos

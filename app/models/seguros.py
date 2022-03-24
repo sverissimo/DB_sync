@@ -1,12 +1,7 @@
-import os
+from time import sleep
 from controller import api
 from services.create_missing_entry import create_missing_entry
 from utils.compare_dates import compare_dates
-
-
-# Set headers
-auth = os.getenv("AUTH_SYNC")
-headers = {"authorization": auth}
 
 file_names = {"xls_file": "ConsultaVeiculos.xls", "sql_file": "seguros.sql"}
 
@@ -17,25 +12,25 @@ fields = [
     ("Data Fim", "vencimento"),
     ("Delegatário", "delegatario"),
     ("Código", "codigo_empresa"),
-    ("Placa", "placa"),
 ]
 
 # oldsteps = [7, 2, 29, 33]
 steps = [4, 3, 3, 25, 29]
+filtered_insurances: list = []
 
-seguradoras = api.get("api/seguradoras")
 
-filtered_insurances = []
-apolices = []
+def get_seguradoras():
+    return api.get("api/seguradoras")
 
 
 def formatData(data):
-    # Retorna uma lista de dicts no formato [{apolice: <nApolice>, placas:[<lista de placas>]}]
-    print("formatData started -- seguros")
+
+    print(" formatData started -- seguros")
 
     # Se houver alguma seguradora nova, inserir no DB do CadTI antes p pegar o id depois
+    seguradoras = get_seguradoras()
     data = create_missing_entry("seguradora", "seguradora", seguradoras, data)
-    updated_seguradoras = api.get("api/seguradoras")
+    updated_seguradoras = get_seguradoras()
 
     for d in data:
         seguradora = d["seguradora"]
@@ -58,16 +53,5 @@ def formatData(data):
     for i in filtered_insurances:
         if "seguradora_id" not in i:
             i["seguradora_id"] = "NULL"
-            # print(i)
 
-        vehicles = []
-        for d in data:
-            if i["apolice"] == d["apolice"]:
-                vehicles.append(d["placa"])
-
-        apolices.append({"apolice": i["apolice"], "placas": vehicles})
-        vehicles = []
-        del i["placa"]
-
-    data_to_return = {"apolices": apolices, "seguros": filtered_insurances}
-    return data_to_return
+    return filtered_insurances

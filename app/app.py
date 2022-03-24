@@ -15,7 +15,6 @@ def main(entity):
 
     module_path = "models." + entity
     module = import_module(module_path, ".")
-
     model = {
         "name": entity,
         "file_names": module.file_names,
@@ -23,10 +22,8 @@ def main(entity):
         "steps": module.steps,
         "formatData": module.formatData,
     }
-
     data = None
     sgti_file_folder = env.SGTI_FILE_FOLDER
-
     should_update = check_data_updates(model, sgti_file_folder)
 
     if should_update:
@@ -47,10 +44,11 @@ def main(entity):
     create_sql_table(sql_file)
     update_db(db_formatted_data, table=entity)
 
-    # Atualiza o status dos veículos com base nas datas de seguro e laudo e cria um restorePont do DB
     if entity == "veiculos":
         main("seguros")
         main("laudos")
+
+        # Atualiza o status dos veículos com base nas datas de seguro e laudo e cria um restorePont do DB
         api.get("sync/forceDbUpdate")
         api.get("sync/createRestorePoint")
         exit()
