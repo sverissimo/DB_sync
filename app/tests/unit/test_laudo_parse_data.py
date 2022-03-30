@@ -15,7 +15,6 @@ def test_parse_laudos_value():
 
     # api is mocked in conftest.py, returns veiculos_mock.json
     json_data = api.get("/api/veiculos")
-    print("json_data: ", json_data[0])
 
     return_data = parse_data(json_data, laudo_model)
     first_entry = return_data[0]

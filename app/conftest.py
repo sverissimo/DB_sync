@@ -1,10 +1,12 @@
 import json
 import pytest
 from controller import api
+from config import env
 
 
 def mock_get(endpoint: str):
 
+    db_sync_folder = env.DB_SYNC_PATH_PY
     file_name = ""
     # testes usam "/api/"" para ter acesso ao json do SGTI, componentes reais usam "api/" para ter acesso ao cadti
     if endpoint.find("/api/") != -1:
@@ -13,7 +15,7 @@ def mock_get(endpoint: str):
         file_name = endpoint.replace("api/", "") + "_cadti_mock.json"
 
     with open(
-        file=f"C:\\Users\\m1107819\\Coding\\DB_sync\\app\\tests\\fixtures\\{file_name}",
+        file=f"{db_sync_folder}\\app\\tests\\fixtures\\{file_name}",
         mode="r",
         encoding="utf-8",
     ) as json_file:
