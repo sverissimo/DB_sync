@@ -1,6 +1,7 @@
 import json
 import pytest
 from controller import api
+from config import env
 
 
 def mock_get(endpoint: str):
@@ -11,9 +12,11 @@ def mock_get(endpoint: str):
         file_name = endpoint.replace("/api/", "") + "_mock.json"
     else:
         file_name = endpoint.replace("api/", "") + "_cadti_mock.json"
-
+    
+    db_sync_folder = env.DB_SYNC_PATH_PY
+    
     with open(
-        file=f"C:\\Users\\m1107819\\Coding\\DB_sync\\app\\tests\\fixtures\\{file_name}",
+        file=f"{db_sync_folder}\\app\\tests\\fixtures\\{file_name}",
         mode="r",
         encoding="utf-8",
     ) as json_file:

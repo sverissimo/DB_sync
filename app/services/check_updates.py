@@ -12,7 +12,7 @@ def check_data_updates(model, sgti_file_folder):
         m_time = datetime.fromtimestamp(xls_timestamp)
         today = datetime.now()
 
-        one_day_old = today - m_time > timedelta(hours=12)
+        one_day_old = today - m_time > timedelta(hours=8)
         print("one_day_old: " + str(one_day_old))
         return one_day_old
     else:
