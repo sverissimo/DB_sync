@@ -13,7 +13,9 @@ def mock_get(endpoint: str):
         file_name = endpoint.replace("/api/", "") + "_mock.json"
     else:
         file_name = endpoint.replace("api/", "") + "_cadti_mock.json"
-
+    
+    db_sync_folder = env.DB_SYNC_PATH_PY
+    
     with open(
         file=f"{db_sync_folder}\\app\\tests\\fixtures\\{file_name}",
         mode="r",

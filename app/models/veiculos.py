@@ -42,7 +42,8 @@ fields = [
 ]
 
 # old_steps = [7, 2, 29, 33]
-steps = [4, 3, 3, 25, 29]
+#non_admin_steps = [4, 3, 3, 25, 29]
+steps = [4, 6, 4, 25, 29]
 
 
 # Converte a string em kg para string em ton
