@@ -29,7 +29,7 @@ def formatData(data):
 
     # Se houver alguma seguradora nova, inserir no DB do CadTI antes p pegar o id depois
     seguradoras = get_seguradoras()
-    data = create_missing_entry("seguradora", "seguradora", seguradoras, data)
+    data = create_missing_entry("seguradoras", "seguradora", seguradoras, data)
     updated_seguradoras = get_seguradoras()
 
     for d in data:
