@@ -15,7 +15,7 @@ fields = [
 ]
 
 # oldsteps = [7, 2, 29, 33]
-steps = [4, 3, 3, 25, 29]
+steps = [4, 6, 4, 25, 29]
 filtered_insurances: list = []
 
 

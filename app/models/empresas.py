@@ -19,7 +19,7 @@ fields = [
     ("CEP", "cep"),
 ]
 
-steps = [4, 3, 1, 9, 11]
+steps = [4, 6, 2, 9, 11]
 
 
 def formatData(data):

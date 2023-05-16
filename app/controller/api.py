@@ -32,12 +32,9 @@ def post(endpoint, data):
         response = requests.post(
             url, json=data, headers=HEADERS, proxies=proxies, verify=False
         )
-        response_type = response.headers.get("content-type")
 
-        if "application/json" in response_type:
-            return response.json()
-        else:
-            return response.text
+        if response.status_code < 299:
+            return response
 
     except requests.exceptions.HTTPError as errh:
         print("Http Error:", errh)
