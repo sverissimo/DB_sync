@@ -9,7 +9,7 @@ load_dotenv()
 
 __AUTH = os.getenv("AUTH_SYNC")
 HEADERS = {"authorization": __AUTH}
-HOST = os.getenv("HOST")
+HOST = os.getenv("CADTI_HOST")
 
 proxies = {"http": None, "https": None} if os.getenv("ENV") == "development" else None
 
